@@ -1,14 +1,21 @@
 package com.alpha.hospital.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class Patient {
+	
+     @Id
 	 private int id;
 	 private String name;
-	 private String Disease;
+	 private String disease;
+	 
 	 public Patient(int id, String name, String disease) {
 		super();
 		this.id = id;
 		this.name = name;
-		Disease = disease;
+		this.disease = disease;
 	 }
 	 public Patient() {
 		super();
@@ -26,16 +33,13 @@ public class Patient {
 		 this.name = name;
 	 }
 	 public String getDisease() {
-		 return Disease;
+		 return disease;
 	 }
 	 public void setDisease(String disease) {
-		 Disease = disease;
+		 this.disease = disease;
 	 }
 	 @Override
 	 public String toString() {
-		return "Patient [id=" + id + ", name=" + name + ", Disease=" + Disease + "]";
+		return "Patient [id=" + id + ", name=" + name + ", Disease=" + disease + "]";
 	 }
-	 
-	
-
 }
