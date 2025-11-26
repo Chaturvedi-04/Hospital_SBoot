@@ -3,6 +3,7 @@ package com.alpha.hospital.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +28,10 @@ public class HospitalController {
 	public ResponseStructure<Doctor> findDoctor(@RequestParam int id)
 	{
 		return hs.findDoctor(id);
+	}
+	@PutMapping("/updateDoctor")
+	public void updatestu(@RequestParam int id,@RequestParam String newname) {
+		hs.updatestu(id, newname);
 	}
 	
 }
