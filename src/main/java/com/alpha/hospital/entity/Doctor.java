@@ -2,21 +2,27 @@ package com.alpha.hospital.entity;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
+@Entity
 public class Doctor {
+	
+	@Id
 	private int id;
 	private String name;
-	private String Specialization;
+	private String specialization;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	 private List<Patient> ptlist;
 
 	public Doctor(int id, String name, String specialization, List<Patient> ptlist) {
 		super();
 		this.id = id;
 		this.name = name;
-		Specialization = specialization;
+		this.specialization = specialization;
 		this.ptlist = ptlist;
 	}
 
@@ -41,11 +47,11 @@ public class Doctor {
 	}
 
 	public String getSpecialization() {
-		return Specialization;
+		return specialization;
 	}
 
 	public void setSpecialization(String specialization) {
-		Specialization = specialization;
+		this.specialization = specialization;
 	}
 
 	public List<Patient> getPtlist() {
@@ -58,7 +64,7 @@ public class Doctor {
 
 	@Override
 	public String toString() {
-		return "Doctor [id=" + id + ", name=" + name + ", Specialization=" + Specialization + ", ptlist=" + ptlist
+		return "Doctor [id=" + id + ", name=" + name + ", Specialization=" + specialization + ", ptlist=" + ptlist
 				+ "]";
 	}
 
