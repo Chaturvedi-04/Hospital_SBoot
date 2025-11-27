@@ -29,9 +29,10 @@ public class HospitalController {
 	{
 		return hs.findDoctor(id);
 	}
+	
 	@PutMapping("/updateDoctor")
-	public void updatestu(@RequestParam int id,@RequestParam String newname) {
-		hs.updatestu(id, newname);
+	public void updateDoctor(@RequestParam int id,@RequestParam String newname) {
+		hs.updateDoc(id, newname);
 	}
 	
 }

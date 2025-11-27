@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import com.alpha.School.Entity.Student;
 import com.alpha.hospital.ResponseStructure;
 import com.alpha.hospital.entity.Doctor;
 import com.alpha.hospital.exception.DoctorNotFoundException;
@@ -29,11 +28,13 @@ public class HospitalService {
 		rs.setData(d);
 		return rs;
 	}
-	public void updatestu(int id,String newname) {
+	public void updateDoc(int id,String newname) {
 		Doctor  d = hr.findById(id).get();
-		d.setName(newname);
+		if(d != null)
+		{
+			d.setName(newname);
+		}
 		hr.save(d);
 	}
-	
 	
 }
