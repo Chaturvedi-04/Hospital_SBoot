@@ -15,8 +15,15 @@ public class HospitalService {
 	@Autowired
 	private HospitalRepo hr;
 	
-	public void saveDoctor(Doctor d) {
+	public ResponseStructure<Doctor> saveDoctor(Doctor d) {
+
+		ResponseStructure<Doctor> rs= new ResponseStructure<Doctor>();		
+		rs.setStatuscode(HttpStatus.CREATED.value());
+		rs.setMessage("Doctor is saved" + d);
+		rs.setData(d);
 		hr.save(d);
+		return rs;
+		
 	}
 	public ResponseStructure<Doctor> findDoctor(int id) {
 		// TODO Auto-generated method stub

@@ -18,9 +18,9 @@ public class HospitalController {
 	private HospitalService hs;
 	
 	@PostMapping("/saveDoctor")
-	public void saveDoctor(@RequestBody Doctor d)
+	public ResponseStructure<Doctor> saveDoctor(@RequestBody Doctor d)
 	{
-		hs.saveDoctor(d);
+		return hs.saveDoctor(d);
 	}
 	
 	@GetMapping("/findDoctor")
