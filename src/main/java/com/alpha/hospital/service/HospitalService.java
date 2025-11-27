@@ -35,6 +35,13 @@ public class HospitalService {
 		rs.setData(d);
 		return rs;
 	}
-	
+	public void updateDoc(int id,String newname) {
+		Doctor  d = hr.findById(id).get();
+		if(d != null)
+		{
+			d.setName(newname);
+		}
+		hr.save(d);
+	}
 	
 }

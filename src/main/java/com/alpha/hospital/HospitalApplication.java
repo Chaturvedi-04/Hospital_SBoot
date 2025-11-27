@@ -1,3 +1,4 @@
+
 package com.alpha.hospital;
 
 import org.springframework.boot.SpringApplication;
