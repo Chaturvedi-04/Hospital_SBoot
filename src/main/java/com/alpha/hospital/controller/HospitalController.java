@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alpha.hospital.ResponseStructure;
 import com.alpha.hospital.entity.Doctor;
+import com.alpha.hospital.exception.InvalidDataException;
 import com.alpha.hospital.service.HospitalService;
 
 @RestController
@@ -32,8 +33,8 @@ public class HospitalController {
 	}
 	
 	@PutMapping("/updateDoctor")
-	public void updateDoctor(@RequestParam int id,@RequestParam String newname) {
-		hs.updateDoc(id, newname);
+	public ResponseStructure<Doctor> updateDoctor(@RequestParam int id,@RequestParam String newname) throws InvalidDataException  {
+		return hs.updateDoctor(id, newname);
 	}
 	
 	@DeleteMapping("/deleteDoctor")

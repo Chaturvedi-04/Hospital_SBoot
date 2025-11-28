@@ -8,6 +8,7 @@ import com.alpha.hospital.ResponseStructure;
 import com.alpha.hospital.entity.Doctor;
 import com.alpha.hospital.exception.DoctorFoundException;
 import com.alpha.hospital.exception.DoctorNotFoundException;
+import com.alpha.hospital.exception.InvalidDataException;
 import com.alpha.hospital.repository.HospitalRepo;
 
 @Service
@@ -41,13 +42,28 @@ public class HospitalService {
 		return rs;
 	}
 	
-	public void updateDoc(int id,String newname) {
-		Doctor  d = hr.findById(id).get();
-		if(d != null)
-		{
-			d.setName(newname);
-		}
-		hr.save(d);
+	public ResponseStructure<Doctor> updateDoctor(int id, String newname) throws InvalidDataException {
+
+	    if (id <= 0) {
+	        throw new IllegalArgumentException("ID cannot be zero or negative");
+	    }
+
+	    if (newname == null || newname.trim().isEmpty()) {
+	        throw new InvalidDataException();
+	    }
+
+	    Doctor d = hr.findById(id)
+	                 .orElseThrow(() -> new DoctorNotFoundException());
+
+	    d.setName(newname);  
+	    hr.save(d);   
+
+	    ResponseStructure<Doctor> rs = new ResponseStructure<>();
+	    rs.setStatuscode(HttpStatus.OK.value());
+	    rs.setMessage("Doctor updated successfully");
+	    rs.setData(d);
+
+	    return rs;
 	}
 	
 	public void deleteDoctor(int id) {
