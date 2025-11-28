@@ -18,4 +18,24 @@ public class GlobalExceptionHandler  {
 		rs.setData("Doctor NOT FOUND");
 		return rs;
 	}
+	
+	@ExceptionHandler(exception = IllegalArgumentException.class)
+	public ResponseStructure<String> IllegalArgumentException()
+	{
+		ResponseStructure<String> rs = new ResponseStructure<String>();
+		rs.setStatuscode(HttpStatus.NOT_ACCEPTABLE.value());
+		rs.setMessage("Invalid ID");
+		rs.setData("Invalid ID");
+		return rs;
+	}
+	
+	@ExceptionHandler(exception = InvalidDataException.class)
+	public ResponseStructure<String> InvalidDataException()
+	{
+		ResponseStructure<String> rs = new ResponseStructure<String>();
+		rs.setStatuscode(HttpStatus.NOT_ACCEPTABLE.value());
+		rs.setMessage("Invalid Data");
+		rs.setData("Invalid Data");
+		return rs;
+	}
 }
