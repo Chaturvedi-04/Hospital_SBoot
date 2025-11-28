@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.alpha.hospital.ResponseStructure;
+import com.alpha.hospital.dto.PatientDto;
 import com.alpha.hospital.entity.Doctor;
 import com.alpha.hospital.entity.Patient;
 import com.alpha.hospital.exception.DoctorFoundException;
@@ -92,6 +93,19 @@ public class HospitalService {
 
         return rs;
     }
+
+	public ResponseStructure<Patient> savePatient1(PatientDto pdto) {
+		Patient p = new Patient();
+		p.setName(pdto.getName());
+		p.setAge(pdto.getAge());
+		p.setDisease(pdto.getDisease());
+		pr.save(p);
+		ResponseStructure<Patient> rs = new ResponseStructure<Patient>();
+		rs.setStatuscode(HttpStatus.ACCEPTED.value());
+		rs.setMessage("Patient Added");
+		rs.setData(p);
+		return rs;
+	}
 
 	
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alpha.hospital.ResponseStructure;
+import com.alpha.hospital.dto.PatientDto;
 import com.alpha.hospital.entity.Doctor;
 import com.alpha.hospital.entity.Patient;
 import com.alpha.hospital.exception.InvalidDataException;
@@ -55,5 +56,11 @@ public class HospitalController {
 	        throw new IllegalArgumentException();
 	     }
 	    return hs.deleteDoctor(id);
-	    }
+	}
+	
+	@PostMapping("/savePatient1")
+	public ResponseStructure<Patient> savePatient1(@RequestBody @Valid PatientDto pdto)
+	{
+		return hs.savePatient1(pdto);
+	}
 }
