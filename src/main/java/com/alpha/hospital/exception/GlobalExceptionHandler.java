@@ -18,4 +18,15 @@ public class GlobalExceptionHandler  {
 		rs.setData("Doctor NOT FOUND");
 		return rs;
 	}
+	
+	@ExceptionHandler(DoctorFoundException.class)
+	public ResponseStructure<String> doctorFoundExceptionHandler()
+	{
+		ResponseStructure<String> rs = new ResponseStructure<String>();
+		rs.setStatuscode(HttpStatus.CONFLICT.value());
+		rs.setMessage("Doctor Already Present");
+		rs.setData("Doctor Already Present");
+		return rs;
+	}
+
 }
