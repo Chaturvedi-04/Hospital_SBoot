@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alpha.hospital.ResponseStructure;
 import com.alpha.hospital.entity.Doctor;
+import com.alpha.hospital.entity.Patient;
 import com.alpha.hospital.exception.InvalidDataException;
 import com.alpha.hospital.service.HospitalService;
+
+import jakarta.validation.Valid;
 
 @RestController
 public class HospitalController {
@@ -21,9 +24,15 @@ public class HospitalController {
 	private HospitalService hs;
 	
 	@PostMapping("/saveDoctor")
-	public ResponseStructure<Doctor> saveDoctor(@RequestBody Doctor d)
+	public ResponseStructure<Doctor> saveDoctor(@RequestBody @Valid Doctor d)
 	{
 		return hs.saveDoctor(d);
+	}
+	
+	@PostMapping("/savePatient")
+	public ResponseStructure<Patient> savePatient(@RequestBody @Valid Patient p)
+	{
+		return hs.savePatient(p);
 	}
 	
     @GetMapping("/findDoctor")

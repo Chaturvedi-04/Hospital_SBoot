@@ -6,16 +6,21 @@ import org.springframework.stereotype.Service;
 
 import com.alpha.hospital.ResponseStructure;
 import com.alpha.hospital.entity.Doctor;
+import com.alpha.hospital.entity.Patient;
 import com.alpha.hospital.exception.DoctorFoundException;
 import com.alpha.hospital.exception.DoctorNotFoundException;
 import com.alpha.hospital.exception.InvalidDataException;
 import com.alpha.hospital.repository.HospitalRepo;
+import com.alpha.hospital.repository.PatientRepo;
 
 @Service
 public class HospitalService {
 
 	@Autowired
 	private HospitalRepo hr;
+	
+	@Autowired
+	private PatientRepo pr;
 	
 	public ResponseStructure<Doctor> saveDoctor(Doctor d) {
 		
@@ -28,6 +33,20 @@ public class HospitalService {
 		rs.setMessage("Doctor is saved" + d);
 		rs.setData(d);
 		hr.save(d);
+		return rs;
+	}
+	
+	public ResponseStructure<Patient> savePatient(Patient p) {
+		
+		if(pr.existsById(p.getId()))
+		{
+			throw new DoctorFoundException();
+		}		
+		ResponseStructure<Patient> rs= new ResponseStructure<Patient>();		
+		rs.setStatuscode(HttpStatus.CREATED.value());
+		rs.setMessage("Patient is saved" + p);
+		rs.setData(p);
+		pr.save(p);
 		return rs;
 	}
 	
