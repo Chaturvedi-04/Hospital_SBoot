@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.alpha.hospital.ResponseStructure;
 import com.alpha.hospital.entity.Doctor;
+import com.alpha.hospital.exception.DoctorIdNotFoundException;
 import com.alpha.hospital.exception.DoctorNotFoundException;
 import com.alpha.hospital.repository.HospitalRepo;
 
@@ -42,6 +43,9 @@ public class HospitalService {
 			d.setName(newname);
 		}
 		hr.save(d);
+	}
+	public void deleteDoctor(int id) {
+		hr.deleteById(id);
 	}
 	
 }
