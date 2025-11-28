@@ -32,42 +32,47 @@ public class HospitalService {
 	}
 	
 	public ResponseStructure<Doctor> findDoctor(int id) {
-		// TODO Auto-generated method stub
-		Doctor d = hr.findById(id).orElseThrow(()-> new DoctorNotFoundException());
-		ResponseStructure<Doctor> rs= new ResponseStructure<Doctor>();
-		
-		rs.setStatuscode(HttpStatus.FOUND.value());
-		rs.setMessage("Doctor with id" + id + "found");
-		rs.setData(d);
-		return rs;
-	}
+
+        Doctor d = hr.findById(id).orElseThrow(() -> new DoctorNotFoundException());
+
+        ResponseStructure<Doctor> rs = new ResponseStructure<>();
+        rs.setStatuscode(HttpStatus.FOUND.value());
+        rs.setMessage("Doctor with ID " + id + " found");
+        rs.setData(d);
+
+        return rs;
+    }
 	
 	public ResponseStructure<Doctor> updateDoctor(int id, String newname) throws InvalidDataException {
-
 	    if (id <= 0) {
 	        throw new IllegalArgumentException("ID cannot be zero or negative");
 	    }
-
 	    if (newname == null || newname.trim().isEmpty()) {
 	        throw new InvalidDataException();
 	    }
-
-	    Doctor d = hr.findById(id)
-	                 .orElseThrow(() -> new DoctorNotFoundException());
+	    Doctor d = hr.findById(id).orElseThrow(() -> new DoctorNotFoundException());
 
 	    d.setName(newname);  
 	    hr.save(d);   
-
 	    ResponseStructure<Doctor> rs = new ResponseStructure<>();
 	    rs.setStatuscode(HttpStatus.OK.value());
 	    rs.setMessage("Doctor updated successfully");
 	    rs.setData(d);
-
 	    return rs;
 	}
 	
-	public void deleteDoctor(int id) {
-		hr.deleteById(id);
-	}
+    public ResponseStructure<String> deleteDoctor(int id) {
+
+        Doctor d = hr.findById(id).orElseThrow(() -> new DoctorNotFoundException());
+        hr.delete(d);
+
+        ResponseStructure<String> rs = new ResponseStructure<>();
+        rs.setStatuscode(HttpStatus.OK.value());
+        rs.setMessage("Doctor deleted");
+        rs.setData("Doctor with ID " + id + " removed");
+
+        return rs;
+    }
+
 	
 }

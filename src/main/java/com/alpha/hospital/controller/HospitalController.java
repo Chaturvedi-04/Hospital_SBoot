@@ -26,20 +26,25 @@ public class HospitalController {
 		return hs.saveDoctor(d);
 	}
 	
-	@GetMapping("/findDoctor")
-	public ResponseStructure<Doctor> findDoctor(@RequestParam int id)
-	{
-		return hs.findDoctor(id);
-	}
-	
+    @GetMapping("/findDoctor")
+    public ResponseStructure<Doctor> findDoctor(@RequestParam int id) {
+        if (id <= 0) {
+            throw new IllegalArgumentException();
+        }
+        return hs.findDoctor(id);
+    }
+    
 	@PutMapping("/updateDoctor")
 	public ResponseStructure<Doctor> updateDoctor(@RequestParam int id,@RequestParam String newname) throws InvalidDataException  {
 		return hs.updateDoctor(id, newname);
 	}
 	
 	@DeleteMapping("/deleteDoctor")
-	public void deleteDoctor(@RequestParam int id) {
-		hs.deleteDoctor(id);
-	}
-	
+	public ResponseStructure<String> deleteDoctor(@RequestParam int id) {
+		if (id <= 0) 
+		{
+	        throw new IllegalArgumentException();
+	     }
+	    return hs.deleteDoctor(id);
+	    }
 }
